@@ -1,12 +1,21 @@
 pub mod encryptor {
-    use std::vec;
+    use std::{vec, path::Path, fs};
 
     use image::{GrayImage, Luma};
 
     pub fn encrypt() {
         let mut line = String::new();
         println!("Enter string to encrypt :");
+
         std::io::stdin().read_line(&mut line).unwrap();
+        let path = line.trim();
+
+        if Path::new(path).is_file(){
+            println!("File {:?} found",line);
+            let  contents= fs::read_to_string(path).expect("Could not read file");
+            line = String::new();
+            line.push_str(&contents);
+        }
 
         let line_length = line.len() as u32;
         let mut counter = 1u32;

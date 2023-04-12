@@ -1,4 +1,6 @@
 pub mod decryptor {
+    use std::{fs::File, io::Write};
+
     use image::open;
 
     pub fn decrypt() {
@@ -29,6 +31,19 @@ pub mod decryptor {
             line.push(character);
         }
 
-        println!("{:?}", line)
+        println!("{:?}", line);
+
+        path = String::new();
+        println!("Path to save message to (Leave blank for default) :");
+        std::io::stdin().read_line(&mut path).unwrap();
+        path.remove(path.len() - 1);
+        if path.is_empty() {
+            path.push_str("message.txt");
+        }
+
+        let mut file = File::create(path).expect("Error");
+        let _result = file.write_all(line.as_bytes());
+
+
     }
 }
