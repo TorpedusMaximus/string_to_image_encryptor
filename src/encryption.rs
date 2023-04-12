@@ -27,12 +27,13 @@ pub mod encryptor {
 
         let mut pixels_values = vec![Luma([0u8]); image_size];
 
-        for i in 0..line_length as usize {
-            let character_in_ascii = line.chars().nth(i).unwrap() as u8;
-            pixels_values[i] = Luma([character_in_ascii]);
+
+        for (index, character) in line.chars().enumerate() {
+            let character_in_ascii = character as u8;
+            pixels_values[index] = Luma([character_in_ascii]);
         }
 
-        let mut pixel_id = 0 as usize;
+        let mut pixel_id = 0;
 
         for x in 0..n {
             for y in 0..n {
@@ -46,7 +47,7 @@ pub mod encryptor {
         println!("Path to image :");
         std::io::stdin().read_line(&mut path).unwrap();
         path.remove(path.len()-1);
-        if path=="" {
+        if path.is_empty() {
             path.push_str("image.png");
         }
 

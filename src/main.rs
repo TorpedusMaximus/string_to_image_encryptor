@@ -1,8 +1,8 @@
-mod encryptor;
-use encryptor::encryptor::encrypt;
+mod encryption;
+use encryption::encryptor::encrypt;
 
-mod decryptor;
-use decryptor::decryptor::decrypt;
+mod decryption;
+use decryption::decryptor::decrypt;
 
 fn main() {
     println!("Welcome to image encryptor/decryptor");
@@ -17,11 +17,11 @@ fn main() {
         choice.remove(choice.len()-1);
 
         if choice.len() == 1 {
-            if choice.contains("1") {
+            if choice.contains('1') {
                 encrypt();
                 break;
             }
-            if choice.contains("2") {
+            if choice.contains('2') {
                 decrypt();
                 break;
             }

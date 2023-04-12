@@ -6,7 +6,7 @@ pub mod decryptor {
         println!("Path to image :");
         std::io::stdin().read_line(&mut path).unwrap();
         path.remove(path.len()-1);
-        if path=="" {
+        if path.is_empty() {
             path.push_str("image.png");
         }
 
@@ -24,8 +24,8 @@ pub mod decryptor {
 
         let mut line = String::new();
 
-        for i in 0..image_values.len() {
-            let character = image_values[i] as char;
+        for pixel in image_values {
+            let character = pixel as char;
             line.push(character);
         }
 
