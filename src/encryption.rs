@@ -1,9 +1,9 @@
 pub mod encryptor {
     use std::{fs, path::Path, vec};
 
-    use image::{GrayImage, ImageBuffer, Luma, Rgb, RgbImage};
+    use image::{GrayImage, Luma, Rgb, RgbImage};
     fn rgb(line: String) -> RgbImage {
-        let mut line_length = line.len() as u32;
+        let line_length = line.len() as u32;
         let rgb_pixel_number = (line_length + (line_length % 3)) / 3;
 
         let mut counter = 1u32;
@@ -23,6 +23,7 @@ pub mod encryptor {
         let mut img = RgbImage::new(n, h);
         let mut pixels_values = vec![Rgb([0u8, 0u8, 0u8]); image_size];
 
+        #[allow(clippy::needless_range_loop)]
         for index in 0..rgb_pixel_number as usize {
             let char1 = line.chars().nth(3 * index).unwrap() as u8;
             let char2 = line.chars().nth(3 * index + 1).unwrap() as u8;
@@ -42,7 +43,7 @@ pub mod encryptor {
             }
         }
 
-        return img;
+        img
     }
     fn grayscale(line: String) -> GrayImage {
         let line_length = line.len() as u32;
@@ -79,7 +80,7 @@ pub mod encryptor {
             }
         }
 
-        return img;
+        img
     }
 
     pub fn encrypt() {
@@ -103,17 +104,9 @@ pub mod encryptor {
         let mut if_compressed = String::new();
         println!("Compress to RGB (y/n) :");
         std::io::stdin().read_line(&mut if_compressed).unwrap();
-        let path = if_compressed.trim();
 
-        let mut compressed=true;
 
         if if_compressed.contains('y'){
-            compressed=true;
-        }else{
-            compressed=false;
-        }
-
-        if compressed {
             let img = rgb(line);
             let mut path = String::new();
             println!("Path to image :");

@@ -17,9 +17,9 @@ pub mod decryptor {
                 return open(path).unwrap().into_luma8().to_vec();
             },
             _ => {
-                return Vec::new();
             },
         }
+        Vec::new()
 
 
     }
